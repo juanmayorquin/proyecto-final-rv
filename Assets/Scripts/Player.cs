@@ -66,7 +66,8 @@ public class Player : MonoBehaviour
         {
             foreach (Light light in actualRoomLights)
             {
-                light.intensity = lightIntensity;
+                float defaultLightIntensity = light.GetComponent<RoomIllumination>().defaultIntensity;
+                light.intensity = defaultLightIntensity * lightIntensity;
                 Debug.Log("Se cambió la intensidad a: " + lightIntensity);
             }
         }
