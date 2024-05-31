@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public int actualRoomId;
 
     [SerializeField] private Color lightColor;
+    [SerializeField] private float lightIntensity;
 
     private Light[] lights;
     [SerializeField] private List<Light> actualRoomLights;
@@ -14,21 +15,27 @@ public class Player : MonoBehaviour
     private void Start()
     {
         lights = GameObject.FindObjectsOfType<Light>();
+        lightColor = Color.white;
     }
 
     private void Update()
     {
-        Debug.Log(lights.Length);
-        Debug.Log(actualRoomLights.Count);
+        
     }
 
     public void ChangeLightColor(Color color)
     {
         lightColor = color;
-        RefreshLights();
+        RefreshLightsColor();
     }
 
-    public void RefreshLights()
+    public void ChangeLightIntensity(float intensity)
+    {
+        lightIntensity= intensity;
+        RefreshLightsIntensity();
+    }
+
+    public void RefreshLightsPresence()
     {
         foreach (var light in lights)
         {
@@ -38,17 +45,38 @@ public class Player : MonoBehaviour
             }
         }
 
+        Debug.Log("Hay " + actualRoomLights.Count + " luces en la habitación");
+    }
+
+    public void RefreshLightsColor()
+    {
         if (actualRoomLights.Count > 0)
         {
             foreach (Light light in actualRoomLights)
             {
                 light.color = lightColor;
+                Debug.Log("Se cambió el color a: " + lightColor);
             }
         }
     }
 
+    public void RefreshLightsIntensity()
+    {
+        if (actualRoomLights.Count > 0)
+        {
+            foreach (Light light in actualRoomLights)
+            {
+                light.intensity = lightIntensity;
+                Debug.Log("Se cambió la intensidad a: " + lightIntensity);
+            }
+        }
+    }
+
+
+
     public void ClearLights()
     {
         actualRoomLights.Clear();
+        RefreshLightsPresence();
     }
 }

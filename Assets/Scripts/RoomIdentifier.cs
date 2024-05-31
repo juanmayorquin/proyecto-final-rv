@@ -11,7 +11,7 @@ public class RoomIdentifier : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.GetComponent<Player>().actualRoomId = id;
-            other.GetComponent<Player>().RefreshLights();
+            other.GetComponent<Player>().RefreshLightsPresence();
         }
     }
     private void OnTriggerExit(Collider other)
