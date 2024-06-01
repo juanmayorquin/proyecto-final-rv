@@ -8,12 +8,14 @@ public class MaterialSetter : MonoBehaviour
     [SerializeField] Material[] mats;
     private Material[] temp;
     private Player player;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         mats = GetComponent<MeshRenderer>().materials;
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -24,7 +26,7 @@ public class MaterialSetter : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag(gameObject.tag))
+        if (collision.gameObject.CompareTag(gameObject.tag) && !collision.gameObject.GetComponent<MaterialSetter>())
 
         {
             Debug.Log("Se entró en colisión con objeto de la misma clase");
@@ -42,6 +44,7 @@ public class MaterialSetter : MonoBehaviour
                 temp[0] = mats[0];
             }
 
+            audioSource.Play();
             collision.gameObject.GetComponent<MeshRenderer>().materials = temp;
         }
     }

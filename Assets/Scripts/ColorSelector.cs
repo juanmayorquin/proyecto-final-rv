@@ -8,9 +8,11 @@ public class ColorSelector : MonoBehaviour
     private Player player;
     private Color color;
     private float intensity = 0.5f;
+    private AudioSource audioSource;
 
     private void Start()
     {
+        audioSource= GetComponentInParent<AudioSource>();
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
 
         if(GetComponent<Button>())
@@ -28,6 +30,7 @@ public class ColorSelector : MonoBehaviour
     {
         player.ChangeLightColor(color);
         Debug.Log("Color seleccionado:" + color.ToString());
+        audioSource.Play();
     }
 
     public void ChangeIntensity()
