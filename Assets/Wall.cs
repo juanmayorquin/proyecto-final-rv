@@ -4,16 +4,5 @@ using UnityEngine;
 
 public class Wall : MonoBehaviour
 {
-    [SerializeField] private Material[] wallMaterials;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int id;
 }

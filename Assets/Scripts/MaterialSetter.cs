@@ -39,6 +39,16 @@ public class MaterialSetter : MonoBehaviour
                     temp[player.actualRoomId] = mats[0];
                 }
             }
+            if (collision.gameObject.CompareTag("Pared"))
+            {
+                foreach (var wall in GameObject.FindObjectsOfType<Wall>()) 
+                {
+                    if (wall.GetComponent<Wall>().id == player.actualRoomId)
+                    {
+                        wall.GetComponent<MeshRenderer>().materials = mats;
+                    }
+                }
+            }
             else
             {
                 temp[0] = mats[0];
